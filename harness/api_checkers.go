@@ -415,19 +415,16 @@ func (s *APICheckSuite) TestInvalidExtract() {
 	span := s.tracer.StartSpan("op")
 
 	// binary extract
-	ctx, err := span.Tracer().Extract(opentracing.Binary, NotACarrier{})
+	_, err := span.Tracer().Extract(opentracing.Binary, NotACarrier{})
 	s.Equal(opentracing.ErrInvalidCarrier, err, "Carrier that's not io.Reader should return error")
-	s.Nil(ctx)
 
 	// text extract
-	ctx, err = span.Tracer().Extract(opentracing.TextMap, NotACarrier{})
+	_, err = span.Tracer().Extract(opentracing.TextMap, NotACarrier{})
 	s.Equal(opentracing.ErrInvalidCarrier, err, "Carrier that's not TextMapReader should return error")
-	s.Nil(ctx)
 
 	// HTTP extract
-	ctx, err = span.Tracer().Extract(opentracing.HTTPHeaders, NotACarrier{})
+	_, err = span.Tracer().Extract(opentracing.HTTPHeaders, NotACarrier{})
 	s.Equal(opentracing.ErrInvalidCarrier, err, "Carrier that's not TextMapReader should return error")
-	s.Nil(ctx)
 
 	span.Finish()
 }

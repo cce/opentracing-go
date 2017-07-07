@@ -106,7 +106,7 @@ type Tracer interface {
 	//  - If there are more fundamental problems with the `carrier` object,
 	//    Extract() may return opentracing.ErrInvalidCarrier,
 	//    opentracing.ErrSpanContextCorrupted, or implementation-specific
-	//    errors.
+	//    errors, with a non-nil SpanContext.
 	//
 	// See Tracer.Inject().
 	Extract(format interface{}, carrier interface{}) (SpanContext, error)
